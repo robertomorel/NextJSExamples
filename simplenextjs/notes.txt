@@ -1,0 +1,49 @@
+****************
+** Next.js *****
+****************
+
+Browser <-> Next <-> Back-end
+
+> Framework para React para desenvolvimento de Frontend Web [camada do cliente]
+> React é uma biblioteca para construção de interface
+    - O next framework facilita para o deploy em prod.
+> Vantagens
+    - Performance
+    - Indexação
+        -- Útil para motores de buscas, como no google    
+> Quando a aplicação não é feito com next.js, toda a interface é contruída no browser
+    - Chamadas a api
+    - CSS
+    - HTML
+    - Caso desabilitemos o JS no browser (Conf/Debugger/Disable Javascript), nada mais aparece
+        -- O JS roda no browser
+> Quando a aplicação usa o next.js, tudo é feito e construído num servidor Node e, após tudo pronto, joga para a interface
+    - Caso desabilitemos o JS no browser (Conf/Debugger/Disable Javascript), nada acontece
+        -- Pq o browser apenas recebe as respostas do serv. Node
+        -- Serve-side rendering
+> Não precisa usar bibliotecas de rotas
+    - O next já se responsabiliza por todas as rotas
+    - Se criarmos uma página com um _ na frente, o next ignora e não transforma em rota  
+    - Rota dinânica (com params)      
+> Styled Components
+    - Por padrão não funciona com o server side rendering
+        -- Caso desabilitemos o JS no navegador, a estiliação não é transformada em CSS
+    - Como work around disto, precisamos criar um babel.config.js e criar um arquivo _document.tsx
+        -- yarn add babel-plugin-styled-components -D
+        ------------------------------------------------------
+        module.exports = {
+            presents: ["next/babel"],
+            plugins: [["styled-components", { "ssr": true }]]
+        }   
+        ------------------------------------------------------
+        -- https://github.com/vercel/next.js/blob/canary/examples/with-styled-components/pages/_document.js
+
+- Para rodar a fake api
+    - npx json-server server.json -p 3333 -w 
+    - npx json-server server.json -p 3333 -w -d 2000 [com delay de 2s]   
+
+- CMS
+    - Nos permite gerenciar conteúdo de páginas/blogs/posts (conteúdos estáticos) e já nos traz um painel de 
+    administração pronto para modificar/add os dados
+    - Se integra facilmente com o Next.js 
+    - Exemplos: ghost, wordpress, strapi (headless), contenful, prismic
